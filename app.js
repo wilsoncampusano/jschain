@@ -1,8 +1,18 @@
 /**
  * Created by wilson.campusano on 10/23/2014.
  */
-var Cal = function Cal( start ) {
+Array.prototype.contains = function(element){
+    var length = this.length;
+    for(var idx = 0; idx < length; idx++){
+        if(this[idx] === element){
+            return true;
+        }
+    }
+    return false;
+}
 
+var Cal = function Cal( start ) {
+    var printers = [];
 	this.add = function add( x ) {
 		start += x;
 		return this;
@@ -14,7 +24,14 @@ var Cal = function Cal( start ) {
 	}.bind(this);
 
 	this.toString = function toString( callback ) {
-		callback( start );
+        if(callback !== undefined && typeof callback === 'function'){
+            if(!printers.contains(callback)){
+                printers.push(callback);
+            }
+        }
+        for(var idx =0; idx< printers.length; idx++){
+            printers[idx](start);
+        }
 		return this;
 	}.bind(this);
 };
@@ -29,4 +46,4 @@ var calculator = new Cal( 0 )
 		.multiply( 5 )
 		.toString( printer )
 		.multiply( 10 )
-		.toString( printer );
+		.toString();
