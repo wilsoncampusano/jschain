@@ -2,13 +2,14 @@
  * Created by wilson.campusano on 10/23/2014.
  */
 Array.prototype.contains = function(element){
-    var length = this.length;
-    for(var idx = 0; idx < length; idx++){
-        if(this[idx] === element){
-            return true;
-        }
-    }
-    return false;
+    var isMatch =false;
+    this.forEach(function(thisElement)
+        { if(thisElement === element) isMatch = true; });
+}
+
+function isAFuntion(callback) {
+    return callback !== undefined
+        && typeof callback === 'function';
 }
 
 var Cal = function Cal( start ) {
@@ -24,14 +25,12 @@ var Cal = function Cal( start ) {
 	}.bind(this);
 
 	this.toString = function toString( callback ) {
-        if(callback !== undefined && typeof callback === 'function'){
+        if(isAFuntion(callback)){
             if(!printers.contains(callback)){
                 printers.push(callback);
             }
         }
-        for(var idx =0; idx< printers.length; idx++){
-            printers[idx](start);
-        }
+        printers.forEach(function(printer){ printer(start); });
 		return this;
 	}.bind(this);
 };
