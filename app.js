@@ -9,6 +9,7 @@ Array.prototype.notContains = function(element){
 }
 
 function isAFuntion(callback) {
+    /* not an extension method because cant verify undefined on this */
     return callback !== undefined
         && typeof callback === 'function';
 }
