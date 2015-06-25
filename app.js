@@ -8,7 +8,7 @@ Array.prototype.notContains = function(element){
     return isNotIn;
 }
 
-function isAFuntion(callback) {
+function isAFunction(callback) {
     /* not an extension method because cant verify undefined on this */
     return callback !== undefined
         && typeof callback === 'function';
@@ -27,7 +27,7 @@ var Cal = function Cal( start ) {
 	}.bind(this);
 
 	this.toString = function toString( callback ) {
-        if(isAFuntion(callback) && printers.notContains(callback)){
+        if(isAFunction(callback) && printers.notContains(callback)){
             printers.push(callback);
         }
         printers.forEach(function(printer){ printer(start); });
